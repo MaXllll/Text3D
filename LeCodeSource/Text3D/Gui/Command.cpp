@@ -23,14 +23,34 @@ doc.recompute()*/
 #include <Gui/MainWindow.h>
 #include <Base/Interpreter.h>
 
+#include <Base/PyObjectBase.h>
+#include <Base/Interpreter.h>
+#include <Base/Exception.h>
+#include <Base/FileInfo.h>
+#include <Base/GeometryPyCXX.h>
+#include <Base/VectorPy.h>
+#include <App/Application.h>
+#include <App/DocumentObjectPy.h>
+
 #include <math.h>
 #include <iostream>
 #include <string>
- #include <sstream>
+#include <sstream>
+
+//#include <../../Part/App/TopoDS_Compound.hxx>
+
+#include "../../Part/App/FT2FC.h"
+//#include "../../Part/App/PartFeature.h"
+#include "../../Part/App/TopoShape.h"/*
+#include "../../Part/App/TopoShapePy.h"
+#include "../../Part/App/opoShapeEdgePy.h"
+#include "../../	Part/App/TopoShapeWirePy.h"*/
+
 //#include <Part/partfeatures.h>
 //#include <Part/Tools.h>
 
 
+//using namespace Part;
 //===========================================================================
 // Part_Extrude
 //===========================================================================
@@ -78,13 +98,33 @@ CmdVaseCreate::CmdVaseCreate()
 void CmdVaseCreate::activated(int iMsg)
 {
 
+    Base::Console().Message("BLLAAAAAAA2");
+
+
+    Py_UNICODE *unichars;
+	Py_ssize_t pysize;
+	const char* fontspec;
+	double height;
+	double track;
+
+	unichars = new Py_UNICODE('A') ;
+	pysize = 1;
+	fontspec = "/Library/Fonts/Futura.ttc";
+	height = 5;
+	track = 0;
+
+	PyObject* WireList = Part::FT2FC(unichars,pysize,fontspec,height,track);
+	/*
+
+    
 	Gui::Command::doCommand(Gui::Command::Doc, "import FreeCAD");
 	Gui::Command::doCommand(Gui::Command::Doc, "import FreeCADGui");
 	Gui::Command::doCommand(Gui::Command::Doc, "from FreeCAD import Base, Vector, Draft");
 	Gui::Command::doCommand(Gui::Command::Doc, "import math");
 
-	std::string str = "J'aime le foie gras du terroir";
-	std::string font = "C:/ThisDossier/arial.ttf";
+	std::string str = "J'aime le foie gras du terrroir";
+    //std::string font = "C:/ThisDossier/arial.ttf";
+    std::string font = "/Library/Fonts/Futura.ttc";
 	Gui::Command::doCommand(Gui::Command::Doc, "radius = 6");
 	Gui::Command::doCommand(Gui::Command::Doc, "fontSize = 5");
 	Gui::Command::doCommand(Gui::Command::Doc, "thickness = 1");
@@ -294,7 +334,7 @@ void CmdVaseCreate::activated(int iMsg)
 	Gui::Command::doCommand(Gui::Command::Doc, command.c_str());
 
 
-	Gui::Command::doCommand(Command::Doc,"App.activeDocument().recompute()" );
+	Gui::Command::doCommand(Command::Doc,"App.activeDocument().recompute()" );*/
 
 	/*
 	App.ActiveDocument.addObject("Part::Cylinder","Cylinder")
